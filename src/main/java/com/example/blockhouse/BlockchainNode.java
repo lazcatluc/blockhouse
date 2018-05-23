@@ -1,7 +1,13 @@
 package com.example.blockhouse;
 
 public class BlockchainNode {
-    public void receive(BlockchainTransaction blockchainTransaction) {
+    private final BlockchainBlock block = new BlockchainBlock();
 
+    public void receive(BlockchainTransaction blockchainTransaction) {
+        block.addNewTransaction(blockchainTransaction);
+    }
+
+    public BlockchainBlock getBlock() {
+        return block;
     }
 }
