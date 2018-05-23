@@ -1,7 +1,8 @@
 package com.example.blockhouse;
 
 public class WorkBroker {
-    public void startWorkingOnBlock(BlockchainNode blockchainNode) {
+    public ProofOfWorkTask startWorkingOnBlock(BlockchainNode blockchainNode) {
 
+        return new ProofOfWorkTask();
     }
 }

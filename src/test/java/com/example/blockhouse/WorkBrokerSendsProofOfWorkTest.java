@@ -1,8 +1,8 @@
 package com.example.blockhouse;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,17 +10,21 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class WorkingOnFindingDifficultProofTest {
-    @InjectMocks
-    private BlockchainNode blockchainNode;
+public class WorkBrokerSendsProofOfWorkTest {
     @Mock
     private BlockchainTransaction blockchainTransaction;
-    @Mock
+    private BlockchainNode blockchainNode;
+    @InjectMocks
     private WorkBroker workBroker;
 
+    @Before
+    public void setUp() throws Exception {
+        blockchainNode = new BlockchainNode(workBroker);
+    }
+
     @Test
-    public void afterReceivingTransactionNodeStartsWorkingOnFindingDifficultProof() {
+    public void workBrokerShouldSendTaskToNodeWhenReceivingTransaction() {
         blockchainNode.receive(blockchainTransaction);
-        verify(workBroker).startWorkingOnBlock(blockchainNode);
+        assertThat(blockchainNode.hasTask()).isTrue();
     }
 }
